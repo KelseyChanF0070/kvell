@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scroll Synchronized Video Expansion</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      /* align-items: center; */
+    }
+
+    #section1 {
+      background-color: white;
+    }
+
+    #section2 {
+      background-color: #222;
+      position: relative;
+    }
+
+    #section3 {
+      background-color: #f3f3f3;
+    }
+
+    video {
+      transition: width 0.1s ease, height 0.1s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <section id="section1"></section>
+
+  <section id="section2">
+    <video id="video" autoplay muted >
+      <source src="robotics.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </section>
+
+  <section id="section3"></section>
+
+  <script>
+    const video = document.getElementById('video');
+    // const section2 = document.getElementById('section2');
+
+    window.addEventListener('scroll', () => {
+      const section2Top = section1.getBoundingClientRect().top;
+      const section2Height = section1.offsetHeight;
+        
+      // Calculate how far we've scrolled into section 2
+      const scrollProgress = Math.min(Math.max(-section2Top  / (section2Height/3), 0), 1);
+
+      // Video size ranges from 50% to 100% of the viewport
+      const videoWidth = 50 + (scrollProgress * 25); // from 50vw to 100vw
+      const videoHeight = 50 + (scrollProgress * 25); // from 50vh to 100vh
+
+      video.style.width = `${videoWidth}vw`;
+      video.style.height = `${videoHeight}vh`;
+    });
+  </script>
+
+</body>
+</html>
