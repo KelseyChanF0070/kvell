@@ -319,7 +319,7 @@ video {
   letter-spacing: .15em; /* Adjust as needed */
   animation: 
     typing 1.5s steps(25, end),
-    blink-caret .1s step-end infinite;
+    blink-caret .5s step-end infinite;
   margin-block: 10rem;
 }
 
